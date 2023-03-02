@@ -19,7 +19,8 @@ public class Guardian extends Person {
     }
 
     public String toString(){
-        return " ";
+        String str = "\nName: "+getName()+"\nAddress: "+getAddress()+"\nContact: "+getContact()+"\nRelation: "+getRelation();
+        return str;
     }
     
 }

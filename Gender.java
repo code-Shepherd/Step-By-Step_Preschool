@@ -1,4 +1,4 @@
-enum Gender {
-    male,
-    female
+public enum Gender{
+    MALE,
+    FEMALE
 }
