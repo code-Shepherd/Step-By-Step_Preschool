@@ -1,7 +1,7 @@
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class WelcomeToStepbyStepUI extends Decorator{
+public class WelcomeToStepbyStepUI extends DecoratorUI{
     private final String name = "Welcome to Step-by-Step PreSchool Online Platform";
     
     public WelcomeToStepbyStepUI(){

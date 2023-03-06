@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 
-public class RegStudentUI extends Decorator {
+public class RegStudentUI extends DecoratorUI {
 
     private RegStudentController reg;
     

@@ -1,4 +1,4 @@
-public abstract class Decorator {
+public abstract class DecoratorUI {
     private final String a = "#";
 
     public void clrscr() {

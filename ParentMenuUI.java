@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class ParentMenuUI extends Decorator{
+public class ParentMenuUI extends DecoratorUI{
     private final String name = "Parents Options";
     
     public ParentMenuUI(){
