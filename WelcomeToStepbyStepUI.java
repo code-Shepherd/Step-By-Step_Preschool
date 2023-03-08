@@ -21,9 +21,9 @@ public class WelcomeToStepbyStepUI extends DecoratorUI{
             try{
                 int opt = scanner.nextInt();
                 if (opt ==1)
-                    new ParentMenuUI();
+                    new RegisterStudentUI();
                 else if (opt ==2)
-                    new AdminMenuUI();
+                    new AdminUI();
                 else if(opt ==0) {   
                     System.out.println("System exitting.....");
                     System.exit(2);}
