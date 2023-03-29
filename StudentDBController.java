@@ -1,12 +1,8 @@
 public class StudentDBController {
 
-    public void addStudent(Student student) {
+    public void getUnassignSt() {
     }
 
-    public boolean studentExist(String name) {
-        return true;
-    }
-
-    public void addGrade(String name, Report grades) {
+    public void addStudent(Student st) {
     }
 }

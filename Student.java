@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Student extends Person{
 
     //Attributes
@@ -9,6 +11,9 @@ public class Student extends Person{
     private Guardian parent1;
     private Guardian parent2;
     private Guardian emerContact;
+    private Grade grade;
+    private ArrayList<Report> reports = new ArrayList<Report>();
+    private String gradeClass= "";
 
     private static int count =0;
 
@@ -52,8 +57,38 @@ public class Student extends Person{
         return emerContact;
     }
 
+    public Grade getGrade(){
+        return grade;
+    }
+
+    public void setGrade(Grade grade){
+        this.grade = grade;  
+    }
+
     private static void countId(){
         count++;
+    }
+
+    public void addReport(Report report){
+        reports.add(report);
+    }
+
+    public Report getReport(int year){
+        int len = reports.size();
+        for(int i=0;i<len;i++){
+            Report report = reports.get(i);
+            if (year == report.getYear())
+                return report;
+        }
+        return null;
+    }
+
+    public String getGradeClass(){
+        return gradeClass;
+    }
+
+    public void setGradeClass(String gradeClass){
+        this.gradeClass = gradeClass;
     }
 
     public String toString(){

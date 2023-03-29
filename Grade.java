@@ -4,7 +4,6 @@ public class Grade{
 
     // variables
     private  HashMap<String, String> grades;
-
     /**
      * This method constructs and initialises a Grade
      * @param grades Represents the grade of a student

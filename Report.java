@@ -1,46 +1,52 @@
-import java.util.*;
 
-public class Report{
+import java.util.Calendar;
 
-    // variables
-    private  HashMap<String, String> grades;
+public class Report {
+    
+    private Grade grade;
+    private int absent;
+    private int present;
+    private int term;
+    private int year;
+    private String gradeClass;
 
-    /**
-     * This method constructs and initialises a Grade
-     * @param grades Represents the grade of a student
-     */
-    public Report(){
-        grades = new HashMap<>(); 
+    public Report(Grade grade, int absent, int present, int term2, String gradeClass){
+        this.grade = grade;
+        this.absent = absent;
+        this.present = present;
+        this.term = term2;
+        Calendar cal = Calendar.getInstance();
+        this.year = cal.get(Calendar.YEAR);
+        this.gradeClass = gradeClass;
     }
 
-    /**
-     * This method returns the grade for a specific subject
-     * @param subject Represents the subject of a student 
-     * @return Returns the grade for a specific subject
-     */
-    public String getGrade(String subject){
-        return this.grades.get(subject);
+    public Grade getGrade(){
+        return grade;
     }
 
-    /**
-     * This method sets the grade of a student for a particular subject 
-     * @param subject Represensts the subject of a student
-     * @param mark Represents the subject of a students
-     */
-    public void setGrade(String subject,String mark){
-        this.grades.replace(subject,mark);
+    public int getPresent(){
+        return present;
     }
 
-
-    /**
-    * @return Returns all grades of a student
-    */
-    public HashMap<String, String> getGrades(){
-        return grades;
+    public int getAbsent(){
+        return absent;
     }
 
-    public void addSubGrade(String subject, String grade){
-        grades.put(subject,grade);
+    public int getTerm(){
+        return term;
     }
 
+    public int getYear(){
+        return year;
+    }
+
+    public String getGradeClass(){
+        return gradeClass;
+    }
+
+    public String toString(){
+        String str = "Year: "+year+"/tTerm: "+term+"/nSessions absent: "+absent+"Session Present"+present;
+        return str;
+    }
+    
 }

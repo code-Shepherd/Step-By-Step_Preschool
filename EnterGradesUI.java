@@ -1,46 +1,34 @@
-import java.nio.channels.NetworkChannel;
 import java.util.Scanner;
 
 public class EnterGradesUI extends DecoratorUI {
 
-    StudentDBController obj;
+    AdminUI ui;
     
-    public EnterGradesUI(){
-        obj = new StudentDBController();
+    public EnterGradesUI(Student student, AdminUI thisForm){
+        ui = thisForm;
 
-    }
-
-    public void displayGradeForm(String name) {
         Scanner scanner = new Scanner(System.in);
-        Report grades = new Report();
-        String title = "Grade Report of "+name;
+        Grade grades = new Grade();
+        String title = "Grade Report of "+student.getName();
         System.out.println(title);
         decorateLine(30);
         key();
         newLine(1);
         emotional(scanner, grades);
-        selfHelp(scanner, grades);
+        newLine(1);
+        /*selfHelp(scanner, grades);
+        newLine(1);
         playHabits(scanner, grades);
+        newLine(1);
         lanugage(scanner, grades);
         if (! continueExit())
             saveExit(name,grades);
         cognitive(scanner, grades);
         grossMotor(scanner, grades);
-        fineMotor(scanner, grades);
+        fineMotor(scanner, grades);*/
 
-        saveExit(name, grades);
+        ui.saveExit(student, grades);
         newLine(2);
-    }
-
-    private void saveExit(String name, Report grades){
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Press 1 to Save and Exit or 0 to Exit Only");
-        int opt = scanner.nextInt();
-        if (opt == 1){
-            obj.addGrade(name, grades);
-        }
-        newLine(2);
-
     }
 
     private void continueExit2(){
@@ -72,7 +60,7 @@ public class EnterGradesUI extends DecoratorUI {
     }
 
 
-    private void emotional(Scanner scanner, Report grades){
+    private void emotional(Scanner scanner, Grade grades){
         System.out.println("#Emotional/Social Development#");
         newLine(1);
         String str;
@@ -98,7 +86,7 @@ public class EnterGradesUI extends DecoratorUI {
         doOver(str,scanner, grades);
     }
 
-    private void selfHelp(Scanner scanner, Report grades){
+    private void selfHelp(Scanner scanner, Grade grades){
         System.out.println("#SELF HELP SKILLS#");
         newLine(1);
         String str;
@@ -110,7 +98,7 @@ public class EnterGradesUI extends DecoratorUI {
         doOver(str,scanner, grades);
     }
     
-    private void playHabits(Scanner scanner, Report grades){     
+    private void playHabits(Scanner scanner, Grade grades){     
         System.out.println("PLAY HABITS");
         newLine(1);
         String str;
@@ -120,7 +108,7 @@ public class EnterGradesUI extends DecoratorUI {
         doOver(str,scanner, grades);
     }
 
-    private void lanugage(Scanner scanner, Report grades){
+    private void lanugage(Scanner scanner, Grade grades){
         System.out.println("LANGUAGE DEVELOPMENT");
         newLine(1);
         String str;   
@@ -145,7 +133,7 @@ public class EnterGradesUI extends DecoratorUI {
     }
     
 
-    private void cognitive(Scanner scanner, Report grades){       
+    private void cognitive(Scanner scanner, Grade grades){       
         System.out.println("#COGNITIVE DEVELOPMENT#");
         newLine(1);
         String str;
@@ -173,7 +161,7 @@ public class EnterGradesUI extends DecoratorUI {
         doOver(str,scanner, grades);
     }
 
-    private void grossMotor(Scanner scanner, Report grades){
+    private void grossMotor(Scanner scanner, Grade grades){
         System.out.println("GROSS MOTOR DEVELOPMENT");
         newLine(1);
         String str;
@@ -189,7 +177,7 @@ public class EnterGradesUI extends DecoratorUI {
         doOver(str,scanner, grades);
     }
 
-    private void fineMotor(Scanner scanner, Report grades){
+    private void fineMotor(Scanner scanner, Grade grades){
         System.out.println("FINE MOTOR DEVELOPMENT");
         newLine(1); 
         String str;     
@@ -205,7 +193,7 @@ public class EnterGradesUI extends DecoratorUI {
         doOver(str,scanner, grades);
     }
 
-    private void doOver(String str, Scanner scanner, Report grades){
+    private void doOver(String str, Scanner scanner, Grade grades){
         System.out.print(str+": ");
         String opt = scanner.next().toUpperCase();
         grades.addSubGrade(str, opt);
