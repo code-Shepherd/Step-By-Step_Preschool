@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Calendar;
 
 public class StudentController{
 
@@ -9,6 +8,7 @@ public class StudentController{
     public StudentController(){
         db = new StudentDBController();
         sList = new ArrayList<Student>(); 
+        
 
     }
 
@@ -49,5 +49,15 @@ public class StudentController{
         else
             return false;
 
+    }
+
+    public ArrayList<Student> getUnassignSt(){
+        ArrayList<Student> lst = new ArrayList<Student>();
+        for(int i=0;i<sList.size();i++){
+            Student st = sList.get(i);
+            if (st.getGradeClass().equals("")) 
+                lst.add(st);
+        }
+        return lst; 
     }
 }

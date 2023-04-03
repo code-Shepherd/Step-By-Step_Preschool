@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -28,9 +29,8 @@ public class AdminUI extends DecoratorUI {
                 switch(menu){
                     case 1:{
                         clrscr();
-                        //db.getUnassignSt();
-                        //to be implemented
-                            break;
+                        displayUnassign(sc.getUnassignSt());
+                        break;
                     }
                     case 2:{
                         String name = enterName();
@@ -74,6 +74,32 @@ public class AdminUI extends DecoratorUI {
             }   
         }
     }
+
+    private void displayUnassign(ArrayList<Student> unassignSt) {
+        for(int i =0;i<unassignSt.size();i++){
+            Scanner scan = new Scanner(System.in);
+            Student st = unassignSt.get(i); 
+            String str = "Name: "+unassignSt.get(i).getName()+ "\tDate of Birth: "+st.getDob()+ "\tAge: "+st.getAge();
+            System.out.println(str);
+            ArrayList<String> classes = new  ArrayList<String>();
+            classes.add("Nursery 1");
+            classes.add("Nursery 2");
+            classes.add("Nursery 3");
+            classes.add("Nursery 4");
+            classes.add("Nursery 5");
+            classes.add("Kindergarten 1");
+            classes.add("Kindergarten 2");
+            classes.add("Kindergarten +");
+            String str1 = "\n1.Nursery 1\t2.Nursery 2\t3.Nursery 3\t4.Nursery 4\t5.Nursery 5";
+            str1+= "6.Kindergarten 1\t7.Kindergarten 2\t8.Kindergarten +";
+            System.out.println(str1);
+            System.out.println("\nEnter Option");
+            int opt = scan.nextInt();
+            String cl = classes.get(i-1) ;
+            st.setGradeClass(cl);  
+        }
+    }
+
 
     public void saveExit(Student student, Grade grades){
         Scanner scanner = new Scanner(System.in);
