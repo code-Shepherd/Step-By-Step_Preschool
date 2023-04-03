@@ -43,12 +43,15 @@ public class StudentController{
     }
 
     public Boolean verifyDetails(String stName, String pName) {
-        Student st = findStudent(stName);
-        if(st.getParent1().getName() == pName || st.getParent2().getName() == pName)
-            return true;
-        else
-            return false;
-
+        
+            Student st = findStudent(stName);
+            if(st.getParent1()!=null && st.getParent2()!=null ){
+                return st.getParent1().getName().equals(pName) || st.getParent2().getName().equals(pName);
+            }
+            else if(st.getParent1()!=null){
+                return st.getParent1().getName().equals(pName);
+            }
+            else return false;
     }
 
     public ArrayList<Student> getUnassignSt(){

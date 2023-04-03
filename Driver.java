@@ -7,6 +7,8 @@ public class Driver {
     public static void main(String[] args) {
         StudentController stCon = new StudentController();
 
+        stCon.registerStudent(new Student("Daneel", "Downer", "9 Miles Bull Bay Beach Road", Gender.FEMALE, 2,"2002-03-10", new Guardian("Celia", "Fearon", "3453245", null, "mother"), null, null));
+
         Scanner scan = new Scanner(System.in);
         int menu = 1;
         while (menu!=0)

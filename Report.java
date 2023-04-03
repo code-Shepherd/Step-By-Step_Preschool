@@ -45,7 +45,8 @@ public class Report {
     }
 
     public String toString(){
-        String str = "Year: "+year+"/tTerm: "+term+"/nSessions absent: "+absent+"Session Present"+present;
+        String str = "Year: "+year+"\t\tTerm: "+term+"\nSessions absent: "+absent+"\t\tSession Present: "+present;
+        str+="\n\n"+getGrade();
         return str;
     }
     

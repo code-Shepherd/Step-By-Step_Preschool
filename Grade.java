@@ -42,4 +42,8 @@ public class Grade{
         grades.put(subject,grade);
     }
 
+    public String toString(){
+        return "Grades:"+getGrades();
+    }
+
 }

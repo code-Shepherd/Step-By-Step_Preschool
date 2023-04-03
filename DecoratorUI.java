@@ -1,5 +1,7 @@
-public abstract class DecoratorUI {
+public class DecoratorUI {
     private final String a = "#";
+
+    public DecoratorUI(){}
 
     public void clrscr() {
         System.out.print("\033[H\033[2J");
