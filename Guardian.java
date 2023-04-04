@@ -1,13 +1,22 @@
-public class Guardian extends Person {
+public class Guardian{
     
     //Attributes
     private String contact;
     private String relation;
+    private PersonalDetails pd;
 
     public Guardian(String fname, String lname, String contact, String address, String relation){
-        super(fname, lname, address);
+        pd = new PersonalDetails(fname, lname, address);
         this.contact = contact;
         this.relation = relation;
+    }
+
+    public String getName(){
+        return pd.getName();
+    }
+
+    public String getAddress(){
+        return pd.getAddress();
     }
 
     public String getContact(){

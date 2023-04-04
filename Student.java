@@ -1,8 +1,9 @@
 import java.util.ArrayList;
 
-public class Student extends Person{
+public class Student{
 
     //Attributes
+
 
     private int id;
     private int age;
@@ -16,9 +17,10 @@ public class Student extends Person{
     private String gradeClass= "";
 
     private static int count =0;
+    private PersonalDetails pd;
 
     public Student(String fname, String lname, String address, Gender gender, int age, String dob, Guardian parent1, Guardian parent2, Guardian emerContact){
-        super(fname, lname, address);
+        pd = new PersonalDetails(fname, lname, address);
         this.age = age;
         this.gender = gender;
         this.dob  = dob;
@@ -27,6 +29,14 @@ public class Student extends Person{
         this.emerContact = emerContact;
         this.id = count;
         countId();   
+    }
+
+    public String getName(){
+        return pd.getName();
+    }
+
+    public String getAddress(){
+        return pd.getAddress();
     }
 
     public int getId(){

@@ -1,11 +1,11 @@
-public abstract class Person{
+public class PersonalDetails{
     
     //Attributes
     private String fname;
     private String lname;
     private String address;
 
-    public Person(String fname, String lname, String address){
+    public PersonalDetails(String fname, String lname, String address){
         this.fname = fname;
         this.lname = lname;
         this.address = address;

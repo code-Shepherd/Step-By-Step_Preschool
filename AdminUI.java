@@ -21,6 +21,8 @@ public class AdminUI extends DecoratorUI {
                 menuOptions+="2.Enter Student Grades\n";
                 menuOptions+="3.Generate Report\n";
                 menuOptions+="4.View Student Report\n";
+                menuOptions+="5.View Class\n";
+                menuOptions+="6.Enter Employee Information\n";
                 menuOptions+="0.Exit\n";
                 menuOptions+="====================================\n";
                 System.out.println(menuOptions); 
@@ -29,7 +31,7 @@ public class AdminUI extends DecoratorUI {
                 switch(menu){
                     case 1:{
                         clrscr();
-                        displayUnassign(sc.getUnassignSt());
+                        sc.assignSt();
                         break;
                     }
                     case 2:{
@@ -65,6 +67,17 @@ public class AdminUI extends DecoratorUI {
                             System.out.println(name+" does not exist in the database");
                         break;
                     }
+                    case 5:{
+                        String cl = enterClass();
+                        clrscr();
+                        
+                        if (sc.classExist(cl)){
+                            sc.viewClass(cl);
+                        }
+                        else
+                            System.out.println(cl+" does not exist in domain");
+                        break;
+                    }
                 }              
             }
             catch(InputMismatchException e){
@@ -73,37 +86,7 @@ public class AdminUI extends DecoratorUI {
         }
     }
 
-    private void displayUnassign(ArrayList<Student> unassignSt) {
-        if (unassignSt.size()<1){
-            System.out.println("There is no unassign students");
-        }
-        else{
-            for(int i =0;i<unassignSt.size();i++){
-                Scanner scan = new Scanner(System.in);
-                Student st = unassignSt.get(i); 
-                String str = "Name: "+unassignSt.get(i).getName()+ "\tDate of Birth: "+st.getDob()+ "\tAge: "+st.getAge();
-                System.out.println(str);
-                ArrayList<String> classes = new  ArrayList<String>();
-                classes.add("Nursery 1");
-                classes.add("Nursery 2");
-                classes.add("Nursery 3");
-                classes.add("Nursery 4");
-                classes.add("Nursery 5");
-                classes.add("Kindergarten 1");
-                classes.add("Kindergarten 2");
-                classes.add("Kindergarten +");
-                String str1 = "\n1.Nursery 1\t2.Nursery 2\t3.Nursery 3\t4.Nursery 4\t5.Nursery 5";
-                str1+= "\t6.Kindergarten 1\t7.Kindergarten 2\t8.Kindergarten +";
-                System.out.println(str1);
-                System.out.println("\nEnter Option");
-                int opt = scan.nextInt();
-                String cl = classes.get(opt-1);
-                st.setGradeClass(cl);  
-            }
-        }
-    }
-
-
+   
     public void saveExit(Student student, Grade grades){
         Scanner scanner = new Scanner(System.in);
         System.out.println("Press 1 to Save and Exit or 0 to Exit Only");
@@ -131,6 +114,13 @@ public class AdminUI extends DecoratorUI {
         System.out.print("Enter student full name: ");
         String name = scan.nextLine();
         return name;    
+    }
+
+    private String enterClass() {
+        Scanner scan = new Scanner(System.in);
+        System.out.print("Enter class name: ");
+        String cl = scan.nextLine();
+        return cl;    
     }
 
 }
