@@ -2,14 +2,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class StudentController{
-
-    private StudentDBController db;
     private ArrayList<Student> sList;
     ArrayList<String> classes = new  ArrayList<String>();
 
 
     public StudentController(){
-        db = new StudentDBController();
         sList = new ArrayList<Student>(); 
         classes.add("Nursery 1");
         classes.add("Nursery 2");
@@ -19,17 +16,20 @@ public class StudentController{
         classes.add("Kindergarten 1");
         classes.add("Kindergarten 2");
         classes.add("Kindergarten +");
-
     }
 
     public void registerStudent(Student st){ 
         sList.add(st);
-        db.addStudent(st);  
+        //db.addStudent(st);  
+    }
+
+    public ArrayList<String> getClasses(){
+        return classes;
     }
 
     public void addGrade(Student student, Grade grades) {
         student.setGrade(grades);
-        db.addGrades(student,grades);
+        //db.addGrades(student,grades);
     }
 
     public boolean studentExist(Student st) {
@@ -51,7 +51,7 @@ public class StudentController{
     public void createReport(Student st, int absent, int present, int term) {
         Report report = new Report(st.getGrade(),absent,present,term,st.getGradeClass());
         st.addReport(report);
-        db.addReport(report);
+        //db.addReport(report);
     }
 
     public Boolean verifyDetails(String stName, String pName) {
@@ -96,7 +96,7 @@ public class StudentController{
                 int opt = scan.nextInt();
                 String cl = classes.get(opt-1);
                 st.setGradeClass(cl);
-                db.setClass(st,cl);
+                //db.setClass(st,cl);
             }
 	    }
     }
@@ -115,9 +115,11 @@ public class StudentController{
             if(st.getGradeClass().equals(cl))
                 slst.add(st);
         }
-
-        System.out.println(slst);
         return slst;
          
+    }
+
+    public ArrayList<Student> getStOfClass(String cl) {
+        return null;
     }
 }

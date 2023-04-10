@@ -1,22 +1,26 @@
 public class Guardian{
     
     //Attributes
+    private String fname;
+    private String lname;
+    private String occupation;
     private String contact;
     private String relation;
-    private PersonalDetails pd;
 
-    public Guardian(String fname, String lname, String contact, String address, String relation){
-        pd = new PersonalDetails(fname, lname, address);
+    public Guardian(String fname, String lname, String contact, String occupation, String relation){
+       this.fname = fname;
+       this.lname = lname;
+       this.occupation =  occupation;
         this.contact = contact;
         this.relation = relation;
     }
 
     public String getName(){
-        return pd.getName();
+        return fname+" "+lname;
     }
 
-    public String getAddress(){
-        return pd.getAddress();
+    public String getOccupation(){
+        return occupation;
     }
 
     public String getContact(){
@@ -28,7 +32,7 @@ public class Guardian{
     }
 
     public String toString(){
-        String str = "\nName: "+getName()+"\nAddress: "+getAddress()+"\nContact: "+getContact()+"\nRelation: "+getRelation();
+        String str = "\nName: "+getName()+"\nOccupation: "+getOccupation()+"\nContact: "+getContact()+"\nRelation: "+getRelation();
         return str;
     }
     

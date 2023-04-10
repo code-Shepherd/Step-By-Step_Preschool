@@ -4,7 +4,9 @@ public class Student{
 
     //Attributes
 
-
+    private String fname;
+    private String lname;
+    private String address;
     private int id;
     private int age;
     private String dob;
@@ -17,10 +19,11 @@ public class Student{
     private String gradeClass= "";
 
     private static int count =0;
-    private PersonalDetails pd;
 
     public Student(String fname, String lname, String address, Gender gender, int age, String dob, Guardian parent1, Guardian parent2, Guardian emerContact){
-        pd = new PersonalDetails(fname, lname, address);
+        this.fname = fname;
+        this.lname = lname;
+        this.address = address;
         this.age = age;
         this.gender = gender;
         this.dob  = dob;
@@ -32,11 +35,11 @@ public class Student{
     }
 
     public String getName(){
-        return pd.getName();
+        return fname+" "+lname;
     }
 
     public String getAddress(){
-        return pd.getAddress();
+        return address;
     }
 
     public int getId(){

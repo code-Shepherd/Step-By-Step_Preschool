@@ -14,15 +14,18 @@ public class ParentUI extends DecoratorUI {
         while (menu!=0)
         {
             try{
+                clrscr();
                 String menuOptions = "=======";
                 menuOptions += name;
                 menuOptions+= "=======\n";
                 menuOptions+="1.Register Student\n";
-                menuOptions+="2.View Student Report\n";
+                menuOptions+="2.View Student Record\n";
+                menuOptions+="3.View Student Report\n";
                 menuOptions+="0.Exit\n";
                 menuOptions+="====================================\n";
                 System.out.println(menuOptions); 
-                newLine(3);       
+                newLine(1); 
+                System.out.println("Enter Option: ");     
                 menu = scan.nextInt();
                 switch(menu){
                     case 1:{
@@ -50,6 +53,21 @@ public class ParentUI extends DecoratorUI {
                         Student st = reg.findStudent(stName);
                         if (reg.studentExist(st)){
                             if (reg.verifyDetails(stName, pName)){
+                                System.out.println(st);
+                            }
+                            else
+                                System.out.println("Parent does not belong to child");  
+                        }
+                        else
+                            System.out.println(name+" does not exist in database"); 
+                        break;
+                    }
+                    case 3:{
+                        String stName = enterName();
+                        String pName = enterParentName();
+                        Student st = reg.findStudent(stName);
+                        if (reg.studentExist(st)){
+                            if (reg.verifyDetails(stName, pName)){
                                 new ReportForm(st);
                             }
                             else
@@ -68,7 +86,7 @@ public class ParentUI extends DecoratorUI {
     }
 
 
-    private Student enterStudentInfo(){
+    Student enterStudentInfo(){
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Welcome to the student registration form!");
@@ -110,6 +128,7 @@ public class ParentUI extends DecoratorUI {
             parent2 = readGuardian(scanner);
         }
 
+        newLine(2);
         System.out.println("Enter Emergency Contact Information");
         Guardian emerContact = readGuardian(scanner);
 
@@ -149,7 +168,7 @@ public class ParentUI extends DecoratorUI {
         return new Guardian(firstName, lastName, phone,addr, relation);
     }
 
-    private String enterParentName() {
+    String enterParentName() {
         Scanner scan = new Scanner(System.in);
         System.out.print("Enter parent full name: ");
         String pName = scan.nextLine();
@@ -163,3 +182,5 @@ public class ParentUI extends DecoratorUI {
         return name;    
     }
 }
+
+
