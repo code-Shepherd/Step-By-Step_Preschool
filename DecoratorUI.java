@@ -1,3 +1,5 @@
+import java.util.concurrent.TimeUnit;
+
 public class DecoratorUI {
     private final String a = "#";
 
@@ -13,6 +15,15 @@ public class DecoratorUI {
             System.out.print(a);
         }
         System.out.println();
+    }
+
+    public void pause(int n){
+        System.out.println("\nScreen pause for"+n+"seconds...");
+        try {
+            TimeUnit.SECONDS.sleep(n);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public void newLine(int n) {

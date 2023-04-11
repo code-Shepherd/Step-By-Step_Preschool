@@ -33,7 +33,7 @@ public class StudentController{
     }
 
     public boolean studentExist(Student st) {
-        if (st==null)
+        if (st.equals(null))
             return false;
         else
             return true;     
@@ -78,28 +78,22 @@ public class StudentController{
 
 	public void assignSt() {
         Scanner scan = new Scanner(System.in);
-        
-        
         ArrayList<Student> unassignSt = getUnassignSt();
-        if (unassignSt.size()<1){
-            System.out.println("There is no unassign students");
-        }
-        else{
-            for(int i=0;i<unassignSt.size();i++){
-                Student st = unassignSt.get(i); 
-                String str = "Name: "+unassignSt.get(i).getName()+ "\tDate of Birth: "+st.getDob()+ "\tAge: "+st.getAge();
-                System.out.println(str);
-                String str1 = "\n1.Nursery 1\t2.Nursery 2\t3.Nursery 3\t4.Nursery 4\t5.Nursery 5";
-                str1+= "\t6.Kindergarten 1\t7.Kindergarten 2\t8.Kindergarten +";
-                System.out.println(str1);
-                System.out.println("\nEnter Option");
-                int opt = scan.nextInt();
-                String cl = classes.get(opt-1);
-                st.setGradeClass(cl);
-                //db.setClass(st,cl);
+        for(int i=0;i<unassignSt.size();i++){
+            Student st = unassignSt.get(i); 
+            String str = "Name: "+unassignSt.get(i).getName()+ "\tDate of Birth: "+st.getDob()+ "\tAge: "+st.getAge();
+            System.out.println(str);
+            String str1 = "\n1.Nursery 1\t2.Nursery 2\t3.Nursery 3\t4.Nursery 4\t5.Nursery 5";
+            str1+= "\t6.Kindergarten 1\t7.Kindergarten 2\t8.Kindergarten +";
+            System.out.println(str1);
+            System.out.println("\nEnter Option");
+            int opt = scan.nextInt();
+            String cl = classes.get(opt-1);
+            st.setGradeClass(cl);
+            //db.setClass(st,cl);
             }
-	    }
-    }
+	}
+    
     public boolean classExist(String cl) {
         for (int i=0;i<classes.size();i++){
             if(classes.get(i).equals(cl))
@@ -108,7 +102,7 @@ public class StudentController{
         return false;
     }
 
-    public ArrayList<Student> viewClass(String cl) {
+    public ArrayList<Student> getStOfClass(String cl) {
         ArrayList<Student> slst = new ArrayList<Student>();
         for (int i=0;i<sList.size();i++){
             Student st = sList.get(i);
@@ -119,7 +113,4 @@ public class StudentController{
          
     }
 
-    public ArrayList<Student> getStOfClass(String cl) {
-        return null;
-    }
 }

@@ -2,10 +2,11 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 
-public class ParentUI extends DecoratorUI {
+public class ParentUI{
 
     private StudentController reg;
     private final String name = "Parents Options";
+    DecoratorUI dui = new DecoratorUI();
     
     public ParentUI(StudentController stcon){
         reg = stcon;
@@ -14,7 +15,7 @@ public class ParentUI extends DecoratorUI {
         while (menu!=0)
         {
             try{
-                clrscr();
+                dui.clrscr();
                 String menuOptions = "=======";
                 menuOptions += name;
                 menuOptions+= "=======\n";
@@ -24,27 +25,27 @@ public class ParentUI extends DecoratorUI {
                 menuOptions+="0.Exit\n";
                 menuOptions+="====================================\n";
                 System.out.println(menuOptions); 
-                newLine(1); 
+                dui.newLine(1); 
                 System.out.println("Enter Option: ");     
                 menu = scan.nextInt();
                 switch(menu){
                     case 1:{
-                        System.out.print("\033[H\033[2J");
-                        System.out.flush();
+                        dui.clrscr();
                         Student student = enterStudentInfo();
-                        clrscr();
+                        dui.clrscr();
                         // Print the student information
                         System.out.println("\nStudent information:");
                         System.out.println(student);
-                        newLine(2);
+                        dui.newLine(2);
                         System.out.println("Press 1 to submit or 0 to exit");
                         int opt2 = scan.nextInt();
                         if (opt2==1){
                             reg.registerStudent(student);
-                            System.out.println("Student successfully registered");       
+                            System.out.println("Student successfully registered"); 
+                            dui.pause(3);      
                         }
                         else
-                            exit(2);
+                            dui.exit(2);
                         break;
                     }
                     case 2:{
@@ -53,7 +54,9 @@ public class ParentUI extends DecoratorUI {
                         Student st = reg.findStudent(stName);
                         if (reg.studentExist(st)){
                             if (reg.verifyDetails(stName, pName)){
+                                System.out.println("\n===="+st.getName()+"'s Record===\n");
                                 System.out.println(st);
+                                dui.pause(5);
                             }
                             else
                                 System.out.println("Parent does not belong to child");  
@@ -68,6 +71,7 @@ public class ParentUI extends DecoratorUI {
                         Student st = reg.findStudent(stName);
                         if (reg.studentExist(st)){
                             if (reg.verifyDetails(stName, pName)){
+                                
                                 new ReportForm(st);
                             }
                             else
@@ -86,11 +90,11 @@ public class ParentUI extends DecoratorUI {
     }
 
 
-    Student enterStudentInfo(){
+    public Student enterStudentInfo(){
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Welcome to the student registration form!");
-        newLine(1);
+        dui.newLine(1);
         System.out.print("Enter first name: ");
         String firstName = scanner.nextLine();
 
@@ -116,11 +120,11 @@ public class ParentUI extends DecoratorUI {
         }
         catch(IllegalArgumentException e){}
 
-        newLine(2);
+        dui.newLine(2);
         System.out.println("Enter Parent 1 Information");
         Guardian parent1 = readGuardian(scanner);
 
-        newLine(2);
+        dui.newLine(2);
         System.out.println("Enter Parent 2 Information (Enter 'skip' to skip)");
         Guardian parent2 = null;
         String skip = scanner.nextLine();
@@ -128,12 +132,12 @@ public class ParentUI extends DecoratorUI {
             parent2 = readGuardian(scanner);
         }
 
-        newLine(2);
+        dui.newLine(2);
         System.out.println("Enter Emergency Contact Information");
         Guardian emerContact = readGuardian(scanner);
 
         //systempause
-        clrscr();
+        dui.clrscr();
         /*int id = 0; // default value
         System.out.print("Enter ID (optional): ");
         String idStr = scanner.nextLine();

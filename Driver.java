@@ -12,12 +12,11 @@ public class Driver {
         stCon.registerStudent(new Student("Daneel", "Downer", "9 Miles Bull Bay Beach Road", Gender.FEMALE, 2,"2002-03-10", new Guardian("Celia", "Fearon", "3453245", null, "mother"), null, null));
 
         Scanner scan = new Scanner(System.in);
-        int menu = 1;
-        while (menu!=0)
+        int t=1;
+        while (t!=0)
         {
             try{
-                System.out.print("\033[H\033[2J");
-                System.out.flush();
+                dui.clrscr();
                 System.out.println(title);
                 dui.decorateLine(36);
                 dui.newLine(2);
@@ -30,7 +29,8 @@ public class Driver {
                 menuOptions+="====================================\n";
                 System.out.println(menuOptions);
                 System.out.println("Enter option #: ");       
-                menu = scan.nextInt();
+                int menu = scan.nextInt();
+                t=menu;
                 switch(menu){
                     case 1:{
                             System.out.print("\033[H\033[2J");

@@ -1,11 +1,12 @@
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
-public class AdminUI extends DecoratorUI {
+public class AdminUI{
     private final String name = "Admin Options";
     private StudentController sc;
-    private ParentUI ui = new ParentUI(sc);
+    DecoratorUI dui = new DecoratorUI();
 
     public AdminUI(StudentController stCon){
         Scanner scanner = new Scanner(System.in);
@@ -15,7 +16,7 @@ public class AdminUI extends DecoratorUI {
         while (menu!=0)
         {
             try{
-                clrscr();
+                dui.clrscr();
                 String menuOptions = "=======";
                 menuOptions += name;
                 menuOptions+= "=======\n";
@@ -31,83 +32,98 @@ public class AdminUI extends DecoratorUI {
                 menuOptions+="0.Exit\n";
                 menuOptions+="====================================\n";
                 System.out.println(menuOptions); 
-                newLine(1); 
-                System.out.print("Enter option: ")      
+                dui.newLine(1); 
+                System.out.print("Enter option: ");     
                 menu = scanner.nextInt();
                 switch(menu){
                     case 1:{
-                        System.out.print("\033[H\033[2J");
-                        System.out.flush();
-                        Student student = ui.enterStudentInfo();
-                        clrscr();
-                        // Print the student information
+                        dui.clrscr();
+                        Student student = enterStudentInfo();
+                        dui.clrscr();
+                        //Print the student information
                         System.out.println("\nStudent information:");
                         System.out.println(student);
-                        newLine(2);
+                        dui.newLine(2);
                         System.out.println("Press 1 to submit or 0 to exit");
                         int opt2 = scanner.nextInt();
                         if (opt2==1){
                             sc.registerStudent(student);
-                            System.out.println("Student successfully registered");       
+                            System.out.println("Student successfully registered");
+                            dui.pause(3);       
                         }
                         else
-                            exit(2);
+                            dui.exit(2);
                         break;
                     }
                     case 2:{
-                        clrscr();
-                        sc.assignSt();
+                        dui.clrscr();
+                        if (sc.getUnassignSt().size()<1){
+                            System.out.println("There is no unassign students");
+                            dui.pause(3);   
+                        }
+                        else{
+                            sc.assignSt();
+                        }
                         break;
                     }
                     case 3:{
                         String stName = enterName();
                         Student st = sc.findStudent(stName);
-                        if (sc.studentExist(st))
+                        //System.out.println(st);
+                        if (sc.studentExist(st)){
                             System.out.println(st);
+                            dui.pause(12);
+                            String y = scanner.nextLine();
+                        }
                         else
                             System.out.println(name+" does not exist in database");    
                         break;
                     }
-                    case 4:
+                    case 4:{ break;}
                         //modify student record
                     case 5:{
                         String name = enterName();
-                        clrscr();
+                        dui.clrscr();
                         Student student = sc.findStudent(name);
                         if (sc.studentExist(student))
                             new EnterGradesUI(student,thisForm);
                         else
                             System.out.println(name+" does not exist in the database"); 
+                            dui.pause(3);
                         break;
                     }
                     case 6:{
                         String name = enterName();
-                        clrscr();
+                        dui.clrscr();
                         Student student = sc.findStudent(name);
                         if (sc.studentExist(student)){
                             enterReportInfo(student);
                             System.out.println(" Student report successfully generated");
+                            dui.pause(3);
                         }
                         else
                             System.out.println(name+" does not exist in the database");
+                            dui.pause(3);
                         break;
                     }
                     case 7:{
                         String name = enterName();
-                        clrscr();
+                        dui.clrscr();
                         Student student = sc.findStudent(name);
                         if (sc.studentExist(student)){
                             new ReportForm(student);
                         }
                         else
                             System.out.println(name+" does not exist in the database");
+                            dui.pause(3);
                         break;
                     }
                     case 8:{
-                        clrscr();
+                        dui.clrscr();
                         displayClasses();
+                        dui.newLine(1);
                         int cl = enterClass();
-                        clrscr();
+                        dui.clrscr();
                         String clas = sc.getClasses().get(cl-1);
                         displayStOfClass(clas);
                         break;
@@ -118,9 +134,8 @@ public class AdminUI extends DecoratorUI {
             }
             catch(InputMismatchException e){
                 System.out.println("Invalid Option");
-            }   
-        }
-    }
+            }
+        }   }
 
 
     public void saveExit(Student student, Grade grades){
@@ -130,7 +145,7 @@ public class AdminUI extends DecoratorUI {
         if (opt == 1){
             sc.addGrade(student, grades);
         }
-        newLine(2);
+        dui.newLine(2);
 
     }
 
@@ -175,6 +190,88 @@ public class AdminUI extends DecoratorUI {
             Student st = slst.get(i);
             System.out.println(st.getName());
         }      
+    }
+
+    public Student enterStudentInfo(){
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Welcome to the student registration form!");
+        dui.newLine(1);
+        System.out.print("Enter first name: ");
+        String firstName = scanner.nextLine();
+
+        System.out.print("Enter last name: ");
+        String lastName = scanner.nextLine();
+
+        System.out.print("Enter address: ");
+        String address = scanner.nextLine();
+
+        System.out.print("Enter age: ");
+        int age = scanner.nextInt();
+
+        scanner.nextLine(); // consume newline left-over
+
+        System.out.print("Enter date of birth (yyyy-mm-dd): ");
+        String dob = scanner.nextLine();
+
+        System.out.print("Enter gender (MALE/FEMALE): ");
+        Gender gender = Gender.MALE;
+        try{
+            String genderStr = scanner.nextLine().toUpperCase();
+            gender = Gender.valueOf(genderStr);
+        }
+        catch(IllegalArgumentException e){}
+
+        dui.newLine(2);
+        System.out.println("Enter Parent 1 Information");
+        Guardian parent1 = readGuardian(scanner);
+
+        dui.newLine(2);
+        System.out.println("Enter Parent 2 Information (Enter 'skip' to skip)");
+        Guardian parent2 = null;
+        String skip = scanner.nextLine();
+        if (!skip.equalsIgnoreCase("skip")) {
+            parent2 = readGuardian(scanner);
+        }
+
+        dui.newLine(2);
+        System.out.println("Enter Emergency Contact Information");
+        Guardian emerContact = readGuardian(scanner);
+
+        //systempause
+        dui.clrscr();
+        /*int id = 0; // default value
+        System.out.print("Enter ID (optional): ");
+        String idStr = scanner.nextLine();
+        if (!idStr.isEmpty()) {
+            id = Integer.parseInt(idStr);
+        }*/
+
+        // Create a new student object
+        Student student = new Student(firstName, lastName, address, gender, age, dob, parent1, parent2, emerContact);
+        return student;
+        /*if (id != 0) {
+            student.setId(id);
+        }*/
+    }
+
+    private static Guardian readGuardian(Scanner scanner) {
+        System.out.print("Enter first name: ");
+        String firstName = scanner.nextLine();
+
+        System.out.print("Enter last name: ");
+        String lastName = scanner.nextLine();
+
+        System.out.print("Enter phone number: ");
+        String phone = scanner.nextLine();
+
+        System.out.print("Enter address: ");
+        String addr = scanner.nextLine();
+
+        System.out.print("Enter relation: ");
+        String relation = scanner.nextLine();
+
+        return new Guardian(firstName, lastName, phone,addr, relation);
     }
 
 }

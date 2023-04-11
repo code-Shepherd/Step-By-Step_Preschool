@@ -8,9 +8,15 @@ public class ReportForm{
     public ReportForm(Student st) {
         dec.clrscr();
         Report report = st.getReport(Calendar.getInstance().get(Calendar.YEAR));
-        String str = "Name: "+st.getName()+"\t\tTeacher: Ms Holms"+"\nAge: "+st.getAge()+"\t\tDate of Birth: "+st.getDob();
-        str+="\n"+report+"\n";
-        System.out.println(str);
+        if (report.equals(null)){
+            System.out.println("No report available for "+st.getName());
+            dec.pause(3);
+        }
+        else{
+            String str = "Name: "+st.getName()+"\t\tTeacher: Ms Holms"+"\nAge: "+st.getAge()+"\t\tDate of Birth: "+st.getDob();
+            str+="\n"+report+"\n";
+            System.out.println(str);
+        }
     }
 
 }
